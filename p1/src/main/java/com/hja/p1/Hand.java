@@ -10,13 +10,14 @@ import java.util.*;
  * @author usuario_local
  */
 public class Hand {
-    private Set<Card> handSet = new HashSet<Card>();
+    private Set<Card> handSet = new TreeSet<Card>();
     private static final int NCARDS = 5;
     
     public Hand(String hand){
-        for(int i=0; i< NCARDS; i=i+2){
+        for(int i=0; i< NCARDS *2; i=i+2){
             handSet.add(createCard(hand.charAt(i)+"", hand.charAt(i+1)+""));
         }
+
     }
     
     public Card createCard(String number, String suit){
