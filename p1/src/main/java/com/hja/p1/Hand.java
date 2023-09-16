@@ -10,8 +10,8 @@ import java.util.*;
  * @author usuario_local
  */
 public class Hand {
-    public Set<Card> handSet = new HashSet<Card>();
-    public static final int NCARDS = 5;
+    private Set<Card> handSet = new HashSet<Card>();
+    private static final int NCARDS = 5;
     
     public Hand(String hand){
         for(int i=0; i< NCARDS; i=i+2){
@@ -23,7 +23,12 @@ public class Hand {
         return new Card(number, suit); 
     }
     
-    public String readHand(){
+    public String readHand(){        
         return "pair";
+    }
+    
+    @Override
+    public String toString(){
+       return handSet.toString();
     }
 }

@@ -1,20 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.hja.p1;
 
-/**
- *
- * @author usuario_local
- */
-public class Card {
-    public final String id;
-    
+public class Card implements Comparable<Card>{
+    private final String id;
     
     public Card(String card){
         id = card;
     }
+    
     public Card(String num, String suit){
         id = num + "" + suit;
     }
@@ -25,4 +17,22 @@ public class Card {
     public char getSuit(){
         return id.charAt(1);
     }
+
+    @Override
+    public int compareTo(Card a) {
+        String valueOrder = "23456789TJQKA";
+                
+        int aValue = valueOrder.indexOf(a.getNumber());
+        int bValue = valueOrder.indexOf(this.getNumber());
+        if(bValue > aValue){
+            return 1;
+        }
+        else if (bValue < aValue){
+            return -1;
+        }
+        else{
+            return 0;
+        }
+    }
+    
 }
