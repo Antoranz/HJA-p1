@@ -15,7 +15,7 @@ public class Card {
     public Card(String card){
         id = card;
     }
-    public Card(char num, char suit){
+    public Card(String num, String suit){
         id = num + "" + suit;
     }
     
