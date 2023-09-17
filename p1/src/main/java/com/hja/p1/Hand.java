@@ -1,14 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.hja.p1;
 
 import java.util.*;
-/**
- *
- * @author usuario_local
- */
+
 public class Hand {
     ArrayList<Card> handList = new ArrayList<>();
     private static final int NCARDS = 5;
@@ -35,7 +28,7 @@ public class Hand {
                     pair += 1;
                     lastPair = true;
                 }else if(lastPair){
-                    three +=1;
+                    three += 1;
                     pair -= 1;
                     lastPair = false;
                     lastThree = true;

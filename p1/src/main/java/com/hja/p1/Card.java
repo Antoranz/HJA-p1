@@ -27,10 +27,7 @@ public class Card implements Comparable<Card>{
             default:
                 number = Integer.parseInt(num);   
         }
-       /*Opcion B En el peor de los casos (A) O(12) 
-        String valueOrder = "23456789TJQKA";
-        number = valueOrder.indexOf(num)+2;
-        */
+        
         this.suit = suit;
     }
     

@@ -1,59 +1,51 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Project/Maven2/JavaApp/src/main/java/${packagePath}/${mainClassName}.java to edit this template
- */
-
 package com.hja.p1;
 
-/**
- *
- * @author usuario_local
- */
 public class P1 {
 
     public static void main(String[] args) {
-        pruebaMano();
+        handTest();
     }
     
-    public static void pruebaMano(){
-        Hand mano = new Hand("AhKhJhQhTh");
-        System.out.println(mano);
-        System.out.println(mano.readHand());
+    public static void handTest(){
         
-        Hand mano2 = new Hand("Th9h8h7h6h");
-        System.out.println(mano2);
-        System.out.println(mano2.readHand());
+        Hand hand = new Hand("AhKhJhQhTh");
+        System.out.println(hand);
+        System.out.println(hand.readHand());
         
-        Hand mano3 = new Hand("AhAdAhAh6h");
-        System.out.println(mano3);
-        System.out.println(mano3.readHand());
+        Hand hand2 = new Hand("Th9h8h7h6h");
+        System.out.println(hand2);
+        System.out.println(hand2.readHand());
         
-        Hand mano4 = new Hand("ThThThKhKh");
-        System.out.println(mano4);
-        System.out.println(mano4.readHand());
+        Hand hand3 = new Hand("AhAdAcAs6h");
+        System.out.println(hand3);
+        System.out.println(hand3.readHand());
         
-        Hand mano5 = new Hand("2h6h8h7h6h");
-        System.out.println(mano5);
-        System.out.println(mano5.readHand());
+        Hand hand4 = new Hand("ThTdTcKhKs");
+        System.out.println(hand4);
+        System.out.println(hand4.readHand());
         
-        Hand mano6 = new Hand("Th9d8h7d6h");
-        System.out.println(mano6);
-        System.out.println(mano6.readHand());
+        Hand hand5 = new Hand("2hKh8h7h6h");
+        System.out.println(hand5);
+        System.out.println(hand5.readHand());
         
-        Hand mano7 = new Hand("AhAhAh7d6h");
-        System.out.println(mano7);
-        System.out.println(mano7.readHand());
+        Hand hand6 = new Hand("Th9d8h7d6h");
+        System.out.println(hand6);
+        System.out.println(hand6.readHand());
         
-        Hand mano8 = new Hand("AhAh6h7d6h");
-        System.out.println(mano8);
-        System.out.println(mano8.readHand());
+        Hand hand7 = new Hand("AhAcAs7d6h");
+        System.out.println(hand7);
+        System.out.println(hand7.readHand());
         
-        Hand mano9 = new Hand("AhAh6h7d8h");
-        System.out.println(mano9);
-        System.out.println(mano9.readHand());
+        Hand hand8 = new Hand("AhAc6s7d6h");
+        System.out.println(hand8);
+        System.out.println(hand8.readHand());
         
-        Hand mano10 = new Hand("Ah9h6h7d8h");
-        System.out.println(mano10);
-        System.out.println(mano10.readHand());
+        Hand hand9 = new Hand("AcAh6h7d8h");
+        System.out.println(hand9);
+        System.out.println(hand9.readHand());
+        
+        Hand hand10 = new Hand("Ah9h6h7d8h");
+        System.out.println(hand10);
+        System.out.println(hand10.readHand());
     }
 }
