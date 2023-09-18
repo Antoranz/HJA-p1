@@ -2,25 +2,32 @@ package com.hja.p1;
 
 import java.util.*;
 
-public class Hand {
+public class Hand implements Comparable<Hand>{
+    
     ArrayList<Card> handList = new ArrayList<>();
     private static final int NCARDS = 5;
+    private final String handValue;
     
     public Hand(String hand){
         for(int i=0; i< NCARDS *2; i=i+2){
             handList.add(createCard(hand.charAt(i)+"", hand.charAt(i+1)+""));
         }
         Collections.sort(handList);
+        handValue = readHand();
     }
     
     public Card createCard(String number, String suit){
         return new Card(number, suit); 
     }
     
-    public String readHand(){
+    public String getHandValue(){
+        return handValue;
+    }
+    
+    private String readHand(){
         
         //Se calcula todas las posibilidades de un solo recorrido, se puede hacer más eficiente¿?
-        int pair = 0, three = 0, poker = 0, escaleraReal = handList.get(0).getNumber(); boolean lastPair = false, lastThree = false, straight =true, color = true;
+        int pair = 0, three = 0, escaleraReal = handList.get(0).getNumber(); boolean lastPair = false, lastThree = false, straight =true, color = true;
         for (int i = 1; i < handList.size(); i++) {
             if(color && !handList.get(i).getSuit().equalsIgnoreCase(handList.get(i-1).getSuit())) color = false;
             if(handList.get(i).getNumber() == handList.get(i-1).getNumber()){
@@ -33,7 +40,6 @@ public class Hand {
                     lastPair = false;
                     lastThree = true;
                 }else if(lastThree){
-                    poker += 1; 
                     return "poker"; //3
                 }         
             }
@@ -58,6 +64,17 @@ public class Hand {
     
         return "High Card: "+handList.get(NCARDS-1);//10
         
+    }
+    
+    @Override
+    public int compareTo(Hand other) {        
+       //TODO
+       String result = this.getHandValue();
+       String otherResult = other.getHandValue();
+       
+       
+        return 0;
+       
     }
     
     @Override
