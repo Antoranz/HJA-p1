@@ -45,7 +45,7 @@ public class Hand implements Comparable<Hand>{
             }
             else {
                 if(straight) {
-                    if(handList.get(i).getNumber()-1 == handList.get(i-1).getNumber()) escaleraReal += handList.get(i).getNumber();
+                    if(handList.get(i).getNumber()-1 == handList.get(i-1).getNumber() || (handList.get(i).getNumber() == 14 && handList.get(i-1).getNumber()==5)) escaleraReal += handList.get(i).getNumber();
                     else straight = false; 
                 }
                 lastPair = false;
@@ -72,7 +72,7 @@ public class Hand implements Comparable<Hand>{
        String result = this.getHandValue();
        String otherResult = other.getHandValue();
        
-       
+       //if(result == otherResult && )
         return 0;
        
     }

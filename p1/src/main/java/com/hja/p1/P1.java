@@ -47,5 +47,9 @@ public class P1 {
         Hand hand10 = new Hand("Ah9h6h7d8h");
         System.out.println(hand10);
         System.out.println(hand10.getHandValue());
+        
+        Hand hand11 = new Hand("Ah2h3h4d5h");
+        System.out.println(hand11);
+        System.out.println(hand11.getHandValue());
     }
 }
