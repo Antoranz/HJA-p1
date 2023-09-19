@@ -3,7 +3,11 @@ package com.hja.p1;
 public class P1 {
 
     public static void main(String[] args) {
-        handTest();
+        //handTest();
+        DeckOfCards doc = new DeckOfCards();
+        System.out.println(doc.getCards());
+        System.out.println(doc.dealingCards(5));
+        System.out.println(doc.getCards());
     }
     
     public static void handTest(){

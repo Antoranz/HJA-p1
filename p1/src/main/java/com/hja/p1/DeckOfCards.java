@@ -16,13 +16,22 @@ public class DeckOfCards {
                 randomCards += ""+orderCards.charAt(numero - 1) + orderCards.charAt(numero);
                 orderCards = orderCards.replace(""+orderCards.charAt(numero - 1) + orderCards.charAt(numero),"");
             }
-            System.out.println(orderCards.length());
         } 
         
     }
     
+    public String dealingCards(int nCards){
+        if (randomCards == null || randomCards.length() < nCards*2) {
+            return null;
+        }
+ 
+        String cards = randomCards.substring(0, nCards*2);
+        randomCards = randomCards.replace(cards,"");
+        
+        return cards;
+    }
+    
     public String getCards(){
-        System.out.println(randomCards);
         return randomCards;
     }
 }
