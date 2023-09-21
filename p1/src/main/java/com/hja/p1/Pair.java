@@ -1,4 +1,3 @@
-
 package com.hja.p1;
 
 public class Pair<K, V> {
