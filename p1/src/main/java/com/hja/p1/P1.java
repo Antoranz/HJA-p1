@@ -65,20 +65,15 @@ public class P1 {
         cardList.add(new Card("J","s"));
         cardList.add(new Card("7","h"));
         
-        int n = cardList.size();
+        int n = cardList.size()-1;
         int k = 5;
         
         Combinations comb = new Combinations(); 
-        List<List<Integer>> combinations = comb.combine(n, k);
-        for (List<Integer> c : combinations) {
+        List<List<Card>> combinations = comb.combine(n, k, cardList); //Combinaciones
+        for (List<Card> c : combinations) {
             System.out.println(c);
         }
              
-        
-        
-        Hand hand10 = new Hand("");
-        System.out.println(hand10);
-        System.out.println(hand10.readHand().getElement0());
         
     }
 }
