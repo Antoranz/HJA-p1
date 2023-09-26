@@ -9,7 +9,7 @@ public class Hand implements Comparable<Hand>{
     private Double handValue;
     
     public Hand(String hand){
-        for(int i=0; i< NCARDS *2; i=i+2){
+        for(int i=0; i< handList.size() *2; i=i+2){
             handList.add(createCard(hand.charAt(i)+"", hand.charAt(i+1)+""));
         }
         Collections.sort(handList);
@@ -84,7 +84,7 @@ public class Hand implements Comparable<Hand>{
         else{
             int tValue;
             int oValue;
-            for(int i = NCARDS; i >= 0; i--){
+            for(int i = handList.size(); i >= 0; i--){
                 tValue = handList.get(i).getNumber();
                 oValue = o.handList.get(i).getNumber();
                 if(tValue != oValue){
