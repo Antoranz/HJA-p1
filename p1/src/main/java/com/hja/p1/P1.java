@@ -6,6 +6,9 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 public class P1 {
 
@@ -73,7 +76,17 @@ public class P1 {
         for (List<Card> c : combinations) {
             System.out.println(c);
         }
-             
+        JFrame p = new Poker();
+        
+        /*JFrame frame = new JFrame("My first JFrame");
+        frame.setSize(600, 600);  
+        ImageIcon image1 = new ImageIcon("C:\\Users\\usuario_local\\Documents\\NetBeansProjects\\HJA-p1\\p1\\src\\main\\java\\com\\hja\\p1\\cardsPng\\10_of_clubs.png");
+        JLabel label = new JLabel(image1);
+        label.setVisible(true);
+        frame.add(label);
+        frame.pack();
+        frame.setVisible(true);  
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); */
         
     }
 }
