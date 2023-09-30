@@ -1,6 +1,7 @@
 package com.hja.p1;
 
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -20,46 +21,9 @@ public class P1 {
         System.out.println(doc.getCards());*/
     }
     
-    public static void handTest(){
+    public static void handTest() {
         
-        /*Hand hand = new Hand("AhKhJhQhTh");
-        System.out.println(hand);
-        System.out.println(hand.readHand().getElement0());
-        
-        Hand hand2 = new Hand("Th9h8h7h6h");
-        System.out.println(hand2);
-        System.out.println(hand2.readHand().getElement0());
-        
-        Hand hand3 = new Hand("AhAdAcAs6h");
-        System.out.println(hand3);
-        System.out.println(hand3.readHand().getElement0());
-        
-        Hand hand4 = new Hand("ThTdTcKhKs");
-        System.out.println(hand4);
-        System.out.println(hand4.readHand().getElement0());
-        
-        Hand hand5 = new Hand("2hKh8h7h6h");
-        System.out.println(hand5);
-        System.out.println(hand5.readHand().getElement0());
-        
-        Hand hand6 = new Hand("Th9d8h7d6h");
-        System.out.println(hand6);
-        System.out.println(hand6.readHand().getElement0());
-        
-        Hand hand7 = new Hand("AhAcAs7d6h");
-        System.out.println(hand7);
-        System.out.println(hand7.readHand().getElement0());
-        
-        Hand hand8 = new Hand("AhAc6s7d6h");
-        System.out.println(hand8);
-        System.out.println(hand8.readHand().getElement0());
-        
-        Hand hand9 = new Hand("AcAh6h7d8h");
-        System.out.println(hand9);
-        System.out.println(hand9.readHand().getElement0());
-        */
-        
-        ArrayList<Card> cardList = new ArrayList<>();
+        /*ArrayList<Card> cardList = new ArrayList<>();
         cardList.add(new Card("A","s"));
         cardList.add(new Card("2","s"));
         cardList.add(new Card("A","d"));
@@ -76,7 +40,20 @@ public class P1 {
         for (List<Card> c : combinations) {
             System.out.println(c);
         }
-        JFrame p = new Poker();
+        JFrame p = new Poker();*/
+        
+        HandStorage hs = new HandStorage();
+        String ruta= "src\\\\main\\\\java\\\\com\\\\hja\\\\p1\\\\casos.txt";
+        try{
+            List<Hand> hl = hs.readHands(ruta);
+            for(int i = 0; i < hl.size(); i++){
+                System.out.println(hl.get(i).toString());
+                System.out.println(hl.get(i).readHand().getElement0());
+            }
+        }catch(FileNotFoundException e){
+            System.out.println("No se ha encontrado el archivo");
+        }
+        
         
         /*JFrame frame = new JFrame("My first JFrame");
         frame.setSize(600, 600);  
