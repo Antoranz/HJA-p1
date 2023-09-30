@@ -26,4 +26,20 @@ public class HandStorage {
         }
         return list;
     }
+    public List<List<Card>> readNCards(String ruta) throws FileNotFoundException{
+        File doc = new File(ruta);
+        Scanner obj = new Scanner(doc);
+
+        List<List<Card>> list = new ArrayList<List<Card>>();
+        while (obj.hasNextLine()){
+            String nCards = obj.nextLine();
+            List<Card> l = new ArrayList<Card>();
+            for (int i = 0; i<nCards.length(); i+=2){
+                l.add(new Card(nCards.charAt(i)+"",nCards.charAt(i+1)+""));
+            }
+            list.add(l);
+        }
+        
+        return list;
+    }
 }

@@ -44,11 +44,26 @@ public class P1 {
         
         HandStorage hs = new HandStorage();
         String ruta= "src\\\\main\\\\java\\\\com\\\\hja\\\\p1\\\\casos.txt";
+        String ruta2= "src\\\\main\\\\java\\\\com\\\\hja\\\\p1\\\\casos2.txt";
         try{
             List<Hand> hl = hs.readHands(ruta);
             for(int i = 0; i < hl.size(); i++){
                 System.out.println(hl.get(i).toString());
                 System.out.println(hl.get(i).readHand().getElement0());
+            }
+            List<List<Card>> loc = hs.readNCards(ruta2);
+            for(int i=0; i<loc.size();i++){
+                List<Card> list = loc.get(i);
+                ArrayList<Card> cardList= new ArrayList<Card>(list);
+                int n = cardList.size()-1;
+                int k = 5;
+
+                Combinations comb = new Combinations(); 
+                List<List<Card>> combinations = comb.combine(n, k, cardList); //Combinaciones
+                System.out.println("Caso "+i);
+                for (List<Card> c : combinations) {
+                    System.out.println(c);
+                }      
             }
         }catch(FileNotFoundException e){
             System.out.println("No se ha encontrado el archivo");
