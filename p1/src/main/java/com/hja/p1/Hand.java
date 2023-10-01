@@ -71,6 +71,112 @@ public class Hand implements Comparable<Hand>{
     
         return new Pair("High Card: "+handList.get(NCARDS-1),1.0);
     }
+
+    public String readDraw(){
+
+        //Se calcula todas las posibilidades de un solo recorrido, se puede hacer más eficiente¿?
+        int pair = 0, three = 0, escaleraReal = handList.get(0).getNumber(), nColor = 1, nStraight = 1; 
+        boolean lastPair = false, lastThree = false, straightDraw =true, gutShot = false, openEnded = false, recienCambiado = false;
+        boolean lowStraight = posibleEscaleraDesdeAbajo();
+        for (int i = 1; i < handList.size(); i++) {
+            if ((handList.get(i).getSuit().equalsIgnoreCase(handList.get(i-1).getSuit()) && !recienCambiado) ||
+            (recienCambiado && handList.get(i).getSuit().equalsIgnoreCase(handList.get(i-2).getSuit()))){
+                nColor++;
+                recienCambiado = false;
+            }
+            else if(!handList.get(i).getSuit().equalsIgnoreCase(handList.get(i-1).getSuit())){
+                recienCambiado = true;
+            } 
+            if(handList.get(i).getNumber() == handList.get(i-1).getNumber()){
+                if(!lastPair && !lastThree){
+                    pair += 1;
+                    lastPair = true;
+                }else if(lastPair){
+                    three += 1;
+                    pair -= 1;
+                    lastPair = false;
+                    lastThree = true;
+                }    
+            }
+            else {
+                if(!lowStraight){
+                    if(straightDraw) {
+                        if(handList.get(i).getNumber()-1 == handList.get(i-1).getNumber() || (handList.get(i).getNumber() == 14 && handList.get(i-1).getNumber()==5)){ 
+                            escaleraReal += handList.get(i).getNumber();
+                            nStraight++;
+                        }
+                        else if (handList.get(i).getNumber()-2 == handList.get(i-1).getNumber() && !gutShot){
+                            gutShot = true;
+                            escaleraReal += handList.get(i).getNumber();
+                            nStraight++;
+                            if(openEnded)
+                                openEnded = false;
+                            else if (i == 1 || i == 4)
+                                openEnded = true;
+                        }
+                        else if ((i == 1 || i == 4) && !openEnded && !gutShot){
+                            openEnded = true;
+                        }else{
+                            straightDraw = false;
+                        }
+                    }
+                }
+                else{
+
+                    if(straightDraw) {
+                        if(i == 1){
+                            if(handList.get(0).getNumber() == 2){
+                                nStraight++;
+                            }
+                            else{
+                                gutShot = true;
+                                nStraight++;
+                                openEnded = true;
+                            }
+                        }
+                        else if(handList.get(i-1).getNumber()-1 == handList.get(i-2).getNumber()){ 
+                            nStraight++;
+                        }
+                        else if (handList.get(i-1).getNumber()-2 == handList.get(i-2).getNumber() && !gutShot){
+                            gutShot = true;
+                            nStraight++;
+                            if (i == 4)
+                                openEnded = true;
+                        }
+                        else if (i == 4 && !openEnded && !gutShot){
+                            openEnded = true;
+                        }else{
+                            straightDraw = false;
+                            if(openEnded)
+                                openEnded = false;
+                        }
+                        
+                    }
+                }
+                lastPair = false;
+                lastThree = false;
+            }
+        }
+
+        //POSIBLES DRAW DE COLOR, ESCALERA O FULL
+        String draws = "";
+        if(nColor == 4)
+            draws += "Color Draw;";
+        if(nStraight >= 4 && gutShot)
+            draws += "Straight Gutshow Draw;";
+        if(nStraight >= 4 && openEnded)
+            draws += "Straight Open-end Draw;";
+        if(three == 1 || pair == 2)
+            draws += "Full Draw;";
+
+        return draws;
+
+    }
+
+    public boolean posibleEscaleraDesdeAbajo(){
+        return (handList.get(4).getNumber() == 14 && (handList.get(0).getNumber() == 2 || handList.get(0).getNumber() == 3) 
+                && (handList.get(1).getNumber() == 3 || handList.get(1).getNumber() == 4));
+    }
     
     @Override
     public String toString(){
