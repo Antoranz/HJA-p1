@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Player implements Comparable<Player>{
 
-    private static int N_PLAYERS = 0;
+    public static int N_PLAYERS = 0;
     public ArrayList<Card> playerCards = new ArrayList<>();
 
     private String id;  //J1, J2 ...
@@ -31,10 +31,6 @@ public class Player implements Comparable<Player>{
             if (currentHand.compareTo(bestHand) == 1)
                 bestHand = currentHand;
         }
-    }
-
-    public static int get_NPlayers(){
-        return this.N_PLAYERS;
     }
 
     @Override

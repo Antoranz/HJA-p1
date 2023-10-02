@@ -19,7 +19,7 @@ public class Hand implements Comparable<Hand>{
     }
     public Hand(){
         handString = "none";
-        handValue = 0;
+        handValue = 0.0;
     }
     
     public Card createCard(String number, String suit){

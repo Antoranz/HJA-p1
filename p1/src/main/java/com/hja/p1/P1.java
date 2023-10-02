@@ -4,6 +4,7 @@ package com.hja.p1;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -14,7 +15,8 @@ import javax.swing.JLabel;
 public class P1 {
 
     public static void main(String[] args) {
-        handTest();
+        //handTest();
+        PlayerTest();
        /* DeckOfCards doc = new DeckOfCards();
         System.out.println(doc.getCards());
         System.out.println(doc.dealingCards(5));
@@ -150,5 +152,44 @@ public class P1 {
         System.out.println(hand45);
         System.out.println(hand45.readDraw());*/
         
+    }
+    public static void PlayerTest(){
+
+        ArrayList<Player> playerList = new ArrayList<>();
+
+        for (int i = 0; i < 4; i++){
+            playerList.add(new Player("J" + i+""));
+
+            // Cartas comunes de la mesa: 5dKs6cTh9h
+            playerList.get(i).playerCards.add(new Card("5","d"));
+            playerList.get(i).playerCards.add(new Card("K", "s"));
+            playerList.get(i).playerCards.add(new Card("6", "c"));
+            playerList.get(i).playerCards.add(new Card("T", "h"));
+            playerList.get(i).playerCards.add(new Card("9", "h"));
+
+            //Cartas propias de cada jugador
+            switch (i){
+                case 0:
+                    playerList.get(i).playerCards.add(new Card("A","h"));
+                    playerList.get(i).playerCards.add(new Card("A","c"));
+                    break;
+                case 1:
+                    playerList.get(i).playerCards.add(new Card("J","s"));
+                    playerList.get(i).playerCards.add(new Card("J","h"));
+                    break;
+                case 2:
+                    playerList.get(i).playerCards.add(new Card("7","c"));
+                    playerList.get(i).playerCards.add(new Card("8","c"));
+                    break;
+                case 3:
+                    playerList.get(i).playerCards.add(new Card("4","s"));
+                    playerList.get(i).playerCards.add(new Card("K","c"));
+                    break;
+            }
+        }
+        Collections.sort(playerList);
+        for (Player p: playerList)
+            p.toString();
+
     }
 }
