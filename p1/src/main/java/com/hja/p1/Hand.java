@@ -17,6 +17,10 @@ public class Hand implements Comparable<Hand>{
         handString = a.getElement0();
         handValue = a.getElement1();
     }
+    public Hand(){
+        handString = "none";
+        handValue = 0;
+    }
     
     public Card createCard(String number, String suit){
         return new Card(number, suit); 
