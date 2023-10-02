@@ -7,16 +7,21 @@ import java.util.List;
 public class Player implements Comparable<Player>{
 
     public static int N_PLAYERS = 0;
-    public ArrayList<Card> playerCards = new ArrayList<>();
+    private ArrayList<Card> playerCards = new ArrayList<>();
 
     private String id;  //J1, J2 ...
-    private Hand bestHand;
+    private Hand bestHand = new Hand();
 
     public Player(String id){
         this.id = id;
         this.N_PLAYERS++;
     }
-
+    public ArrayList<Card> getPlayerCards(){
+        return playerCards;
+    }
+    public void addCard(Card c){
+        playerCards.add(c);
+    }
     public void bestHand(){
         double bestValue = -1;
         
@@ -26,7 +31,7 @@ public class Player implements Comparable<Player>{
         Combinations comb = new Combinations();
         List<List<Card>> combinations = comb.combine(n, k, playerCards); //Combinaciones
         for (List<Card> c : combinations) {
-            Hand currentHand = new Hand (c.toString());
+            Hand currentHand = new Hand (c); 
 
             if (currentHand.compareTo(bestHand) == 1)
                 bestHand = currentHand;
@@ -35,8 +40,8 @@ public class Player implements Comparable<Player>{
 
     @Override
     public int compareTo(Player other){
-        if(bestHand.compareTo(other.getBestHand()) == 1) return 1;
-        else if (bestHand.compareTo(other.getBestHand()) == -1) return -1;
+        if(this.bestHand.compareTo(other.getBestHand()) == 1) return -1;
+        else if (this.bestHand.compareTo(other.getBestHand()) == -1) return 1;
         else return 0;
     }
 

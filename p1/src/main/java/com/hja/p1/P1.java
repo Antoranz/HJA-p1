@@ -158,38 +158,40 @@ public class P1 {
         ArrayList<Player> playerList = new ArrayList<>();
 
         for (int i = 0; i < 4; i++){
-            playerList.add(new Player("J" + i+""));
-
+            Player p = new Player("J" + i+"");
+            
             // Cartas comunes de la mesa: 5dKs6cTh9h
-            playerList.get(i).playerCards.add(new Card("5","d"));
-            playerList.get(i).playerCards.add(new Card("K", "s"));
-            playerList.get(i).playerCards.add(new Card("6", "c"));
-            playerList.get(i).playerCards.add(new Card("T", "h"));
-            playerList.get(i).playerCards.add(new Card("9", "h"));
+            p.addCard(new Card("4","d"));
+            p.addCard(new Card("2", "s"));
+            p.addCard(new Card("3", "c"));
+            p.addCard(new Card("T", "h"));
+            p.addCard(new Card("5", "h"));
 
             //Cartas propias de cada jugador
             switch (i){
                 case 0:
-                    playerList.get(i).playerCards.add(new Card("A","h"));
-                    playerList.get(i).playerCards.add(new Card("A","c"));
+                    p.addCard(new Card("A","h"));
+                    p.addCard(new Card("A","c"));
                     break;
                 case 1:
-                    playerList.get(i).playerCards.add(new Card("J","s"));
-                    playerList.get(i).playerCards.add(new Card("J","h"));
+                    p.addCard(new Card("J","s"));
+                    p.addCard(new Card("J","h"));
                     break;
                 case 2:
-                    playerList.get(i).playerCards.add(new Card("7","c"));
-                    playerList.get(i).playerCards.add(new Card("8","c"));
+                    p.addCard(new Card("7","c"));
+                    p.addCard(new Card("8","c"));
                     break;
                 case 3:
-                    playerList.get(i).playerCards.add(new Card("4","s"));
-                    playerList.get(i).playerCards.add(new Card("K","c"));
+                    p.addCard(new Card("4","s"));
+                    p.addCard(new Card("K","c"));
                     break;
             }
+            p.bestHand();
+            playerList.add(p);
         }
         Collections.sort(playerList);
         for (Player p: playerList)
-            p.toString();
-
+            System.out.println(p.toString());
+            
     }
 }

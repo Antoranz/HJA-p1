@@ -21,7 +21,15 @@ public class Hand implements Comparable<Hand>{
         handString = "none";
         handValue = 0.0;
     }
-    
+    public Hand(List<Card> c){
+        for(int i=0; i< c.size(); i++){
+            handList.add(c.get(i));
+        }
+        Collections.sort(handList);
+        Pair<String, Double> a = readHand(); 
+        handString = a.getElement0();
+        handValue = a.getElement1();
+    }
     public Card createCard(String number, String suit){
         return new Card(number, suit); 
     }
@@ -34,6 +42,7 @@ public class Hand implements Comparable<Hand>{
         for (int i = 1; i < handList.size(); i++) {
             if(color && !handList.get(i).getSuit().equalsIgnoreCase(handList.get(i-1).getSuit())) color = false;
             if(handList.get(i).getNumber() == handList.get(i-1).getNumber()){
+                straight = false;
                 if(!lastPair && !lastThree){
                     pair++;
                     if(pair == 1)valorP1 = handList.get(i).getNumber()/100.0;
@@ -52,8 +61,8 @@ public class Hand implements Comparable<Hand>{
             }
             else {
                 if(straight) {
-                    if(handList.get(i).getNumber()-1 == handList.get(i-1).getNumber()){
-                        valorS = handList.get(i).getNumber();
+                    if(handList.get(i).getNumber()-1 == handList.get(i-1).getNumber()|| (handList.get(i).getNumber() == 14 && handList.get(i-1).getNumber()==5)){
+                        valorS = handList.get(i).getNumber()/100.0;
                         escaleraReal += handList.get(i).getNumber();
                     }
                     else straight = false; 
@@ -73,7 +82,7 @@ public class Hand implements Comparable<Hand>{
         else if(pair == 2) return new Pair("Double Pair" , 3 + valorP2 + valorP1/100.0);
         else if(pair == 1) return new Pair("Pair" ,2 + valorP1);
     
-        return new Pair("High Card: "+handList.get(NCARDS-1),1.0);
+        return new Pair("High Card: "+handList.get(NCARDS-1),1.0+ handList.get(NCARDS-1).getNumber()/100.0);
     }
 
     public String readDraw(){
@@ -194,7 +203,7 @@ public class Hand implements Comparable<Hand>{
         else{
             int tValue;
             int oValue;
-            for(int i = handList.size(); i >= 0; i--){
+            for(int i = handList.size()-1; i >= 0; i--){
                 tValue = handList.get(i).getNumber();
                 oValue = o.handList.get(i).getNumber();
                 if(tValue != oValue){
