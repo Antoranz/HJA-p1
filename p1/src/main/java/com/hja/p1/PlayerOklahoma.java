@@ -38,9 +38,9 @@ public class PlayerOklahoma extends Player{
         for(List<Card> cP: combinationsPlayerCards){
             
             for (List<Card> cB : combinationsBoardCards) {
-                
-                cB.addAll(cP);
-                Hand currentHand = new Hand (cB); 
+                List<Card> aux = new ArrayList<Card>(cB);
+                aux.addAll(cP);
+                Hand currentHand = new Hand (aux); 
 
                 if (currentHand.compareTo(bestHand) == 1)
                     bestHand = currentHand;

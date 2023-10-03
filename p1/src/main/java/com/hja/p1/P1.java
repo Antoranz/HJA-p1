@@ -19,7 +19,7 @@ public class P1 {
     public static void main(String[] args) {
         //handTest();
         //PlayerTest();
-        PlayerOklahomaTest();
+        casosProfe();
        /* DeckOfCards doc = new DeckOfCards();
         System.out.println(doc.getCards());
         System.out.println(doc.dealingCards(5));
@@ -176,17 +176,62 @@ public class P1 {
             
     }
     
-    public static void PlayerOklahomaTest(){
+    public static void casosProfe(){
         
-        //AhAc8s5h;4;2h2d2c2s
+        //Entrada 1 txt
+        System.out.println("Caso 1");
         HandStorage hs = new HandStorage();
+        String ruta1= "src\\\\main\\\\java\\\\com\\\\hja\\\\p1\\\\entrada.txt";
+        
+        try {
+            List<Hand> hL = hs.readHands(ruta1);
+            for(int i=0; i< hL.size();i++){
+                System.out.println(hL.get(i).toString());
+            }
+            
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(P1.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        //Entrada 2 txt
+        System.out.println("Caso 2");
+        String ruta2= "src\\\\main\\\\java\\\\com\\\\hja\\\\p1\\\\entrada2.txt";
+        
+        try {
+            List<Player> pL = hs.readNCards(ruta2,false);
+            for(int i=0; i< pL.size();i++){
+                System.out.println(pL.get(i).getBestHand());
+            }
+            
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(P1.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        //Entrada 3 txt
+        System.out.println("Caso 3");
+        String ruta3= "src\\\\main\\\\java\\\\com\\\\hja\\\\p1\\\\entrada3.txt";
+        
+        try {
+            List<List<Player>> pL = hs.readNPlayer(ruta3);
+            for(int i=0; i< pL.size();i++){
+                Collections.sort(pL.get(i));
+                for (Player p: pL.get(i))
+                    System.out.println(p.toString());
+            }
+            
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(P1.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        //Entrada 4 txt
+        System.out.println("Caso 4");
         String ruta= "src\\\\main\\\\java\\\\com\\\\hja\\\\p1\\\\entrada4.txt";
         
         try {
-            PlayerOklahoma p = new PlayerOklahoma("J" + Player.N_PLAYERS);
-            hs.readNCards(ruta,p);
-            p.bestHand();
-            System.out.println(p.getBestHand());
+            List<Player> pL = hs.readNCards(ruta,true);
+            for(int i=0; i< pL.size();i++){
+                System.out.println(pL.get(i).getBestHand());
+            }
             
         } catch (FileNotFoundException ex) {
             Logger.getLogger(P1.class.getName()).log(Level.SEVERE, null, ex);

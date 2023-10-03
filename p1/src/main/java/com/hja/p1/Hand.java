@@ -7,6 +7,7 @@ public class Hand implements Comparable<Hand>{
     private static final int NCARDS = 5;
     private String handString;
     private Double handValue;
+    private String handDraw;
     
     public Hand(String hand){
         for(int i=0; i< NCARDS *2; i=i+2){
@@ -16,6 +17,7 @@ public class Hand implements Comparable<Hand>{
         Pair<String, Double> a = readHand(); 
         handString = a.getElement0();
         handValue = a.getElement1();
+        handDraw = readDraw();
     }
     public Hand(){
         handString = "none";
@@ -193,7 +195,7 @@ public class Hand implements Comparable<Hand>{
     
     @Override
     public String toString(){
-       return handList.toString() + handValue;
+       return handList.toString() +" "+ handValue +" "+ handString +" "+ handDraw;
     }
 
     @Override
