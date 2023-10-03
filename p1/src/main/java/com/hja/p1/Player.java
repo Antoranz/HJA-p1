@@ -5,12 +5,13 @@ import java.util.List;
 
 
 public class Player implements Comparable<Player>{
-
+    
     public static int N_PLAYERS = 0;
-    private ArrayList<Card> playerCards = new ArrayList<>();
-
+    protected ArrayList<Card> playerCards = new ArrayList<>();
+    protected ArrayList<Card> boardCards = new ArrayList<>();
+    
     private String id;  //J1, J2 ...
-    private Hand bestHand = new Hand();
+    protected Hand bestHand = new Hand();
 
     public Player(String id){
         this.id = id;
@@ -19,23 +20,29 @@ public class Player implements Comparable<Player>{
     public ArrayList<Card> getPlayerCards(){
         return playerCards;
     }
+    public void addBoardCard(Card c){
+        boardCards.add(c);
+    }
     public void addCard(Card c){
         playerCards.add(c);
     }
     public void bestHand(){
         double bestValue = -1;
+        ArrayList<Card> allCards = new ArrayList<>();
+        allCards.addAll(boardCards);
+        allCards.addAll(playerCards);
         
-        int n = playerCards.size()-1;
+        int n = allCards.size()-1;
         int k = 5;
-
+        
         Combinations comb = new Combinations();
-        List<List<Card>> combinations = comb.combine(n, k, playerCards); //Combinaciones
+        List<List<Card>> combinations = comb.combine(n, k, allCards); //Combinaciones
         for (List<Card> c : combinations) {
             Hand currentHand = new Hand (c); 
 
             if (currentHand.compareTo(bestHand) == 1)
                 bestHand = currentHand;
-        }
+        }            
     }
 
     @Override
