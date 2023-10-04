@@ -17,7 +17,6 @@ public class Hand implements Comparable<Hand>{
         Pair<String, Double> a = readHand(); 
         handString = a.getElement0();
         handValue = a.getElement1();
-        handDraw = readDraw();
     }
     public Hand(){
         handString = "none";
@@ -31,7 +30,6 @@ public class Hand implements Comparable<Hand>{
         Pair<String, Double> a = readHand(); 
         handString = a.getElement0();
         handValue = a.getElement1();
-        handDraw = readDraw();
     }
     public Card createCard(String number, String suit){
         return new Card(number, suit); 
@@ -96,16 +94,21 @@ public class Hand implements Comparable<Hand>{
         //Se calcula todas las posibilidades de un solo recorrido, se puede hacer más eficiente¿?
         int pair = 0, three = 0, escaleraReal = handList.get(0).getNumber(), nColor = 1, nStraight = 1; 
         boolean lastPair = false, lastThree = false, straightDraw =true, gutShot = false, openEnded = false, recienCambiado = false;
-        boolean lowStraight = posibleEscaleraDesdeAbajo();
+        //Comprueba si es una escalera que empieza desde el AS ascendentemente
+        boolean lowStraight = posibleEscaleraDesdeAbajo();  
+        //Bucle de lectura de cartas
         for (int i = 1; i < handList.size(); i++) {
+            //Comprobación de cartas con el mismo color
             if ((handList.get(i).getSuit().equalsIgnoreCase(handList.get(i-1).getSuit()) && !recienCambiado) ||
             (recienCambiado && handList.get(i).getSuit().equalsIgnoreCase(handList.get(i-2).getSuit()))){
                 nColor++;
                 recienCambiado = false;
             }
+            //Comprobación de cambio de color
             else if(!handList.get(i).getSuit().equalsIgnoreCase(handList.get(i-1).getSuit())){
                 recienCambiado = true;
             } 
+            //Comprobación de cartas iguales para pares y trios
             if(handList.get(i).getNumber() == handList.get(i-1).getNumber()){
                 if(!lastPair && !lastThree){
                     pair += 1;
@@ -117,31 +120,39 @@ public class Hand implements Comparable<Hand>{
                     lastThree = true;
                 }    
             }
+            //Comprobación escalera
             else {
+                //Si es una escalera en la que el As no va a contar como un 1
                 if(!lowStraight){
                     if(straightDraw) {
+                        //Comprobación de que haya dos cartas consecutivas formando escalera
                         if(handList.get(i).getNumber()-1 == handList.get(i-1).getNumber() || (handList.get(i).getNumber() == 14 && handList.get(i-1).getNumber()==5)){ 
                             escaleraReal += handList.get(i).getNumber();
                             nStraight++;
                         }
+                        //Comprobación de gutshot
                         else if (handList.get(i).getNumber()-2 == handList.get(i-1).getNumber() && !gutShot){
                             gutShot = true;
                             escaleraReal += handList.get(i).getNumber();
                             nStraight++;
+                            //Se elimina la posibilidad del openEnded que se habia encontrado al detectar un gutshot
                             if(openEnded)
                                 openEnded = false;
+                            //Se comprueba si hay openEnded y gutshot al mismo tiempo
                             else if (i == 1 || i == 4 && pair == 0)
                                 openEnded = true;
                         }
+                        //Comprobación de openEnded
                         else if ((i == 1 || i == 4) && !openEnded && !gutShot){
                             openEnded = true;
+                        //En caso de que no se cumpla nada de lo anterior no hay posibilidad de draw de escalera
                         }else{
                             straightDraw = false;
                         }
                     }
                 }
+                //Si es una posible escalera desde el As
                 else{
-
                     if(straightDraw) {
                         if(i == 1){
                             if(handList.get(0).getNumber() == 2){
@@ -180,13 +191,19 @@ public class Hand implements Comparable<Hand>{
         //POSIBLES DRAW DE COLOR, ESCALERA O FULL
         String draws = "";
         if(nColor == 4)
-            draws += "Color Draw;";
+            draws += "Flush;";
         if(nStraight >= 4 && gutShot)
-            draws += "Straight Gutshow Draw;";
+            draws += "Straight Gutshow;";
         if(nStraight >= 4 && openEnded)
-            draws += "Straight Open-end Draw;";
+            draws += "Straight Open-end;";
         if((three == 1 && pair == 0)|| pair == 2)
-            draws += "Full Draw;";
+            draws += "Full;";
+
+        /*
+        Para el caso de la escalera de color y escalera real la forma de hacerlo que se nos ha ocurrido es extremadamente costosa y no creemos
+        que sea la solución adecuada para resolver el problema, por tanto no la hemos añadido pero la dejamos aquí por si sirve de algo
+        
+        */
 
         return draws;
 
@@ -262,9 +279,11 @@ public class Hand implements Comparable<Hand>{
     public String mostrarNumero(int parteDecimal){
 
         String s = "";
-        System.out.println("hola " + parteDecimal);
         
         switch (parteDecimal){
+            case 1:
+                s = "10's";
+                break;
             case 11:
                 s = "Jacks";
                 break;

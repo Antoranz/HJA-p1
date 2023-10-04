@@ -11,7 +11,7 @@
             </goals>
             <properties>
                 <exec.vmArgs></exec.vmArgs>
-                <exec.args>${exec.vmArgs} -classpath %classpath ${exec.mainClass} ${exec.appArgs}</exec.args>
+                <exec.args>-classpath %classpath com.hja.p1.main 1 entrada.txt salida.txt</exec.args>
                 <exec.appArgs>1 entrada.txt salida.txt</exec.appArgs>
                 <exec.mainClass>com.hja.p1.main</exec.mainClass>
                 <exec.executable>java</exec.executable>
@@ -28,7 +28,7 @@
             </goals>
             <properties>
                 <exec.vmArgs>-agentlib:jdwp=transport=dt_socket,server=n,address=${jpda.address}</exec.vmArgs>
-                <exec.args>${exec.vmArgs} -classpath %classpath ${exec.mainClass} ${exec.appArgs}</exec.args>
+                <exec.args>-agentlib:jdwp=transport=dt_socket,server=n,address=${jpda.address} -classpath %classpath com.hja.p1.main 1 entrada.txt salida.txt</exec.args>
                 <exec.appArgs>1 entrada.txt salida.txt</exec.appArgs>
                 <exec.mainClass>com.hja.p1.main</exec.mainClass>
                 <exec.executable>java</exec.executable>
@@ -46,7 +46,7 @@
             </goals>
             <properties>
                 <exec.vmArgs></exec.vmArgs>
-                <exec.args>${exec.vmArgs} -classpath %classpath ${exec.mainClass} ${exec.appArgs}</exec.args>
+                <exec.args>-classpath %classpath com.hja.p1.main 1 entrada.txt salida.txt</exec.args>
                 <exec.mainClass>com.hja.p1.main</exec.mainClass>
                 <exec.executable>java</exec.executable>
                 <exec.appArgs>1 entrada.txt salida.txt</exec.appArgs>

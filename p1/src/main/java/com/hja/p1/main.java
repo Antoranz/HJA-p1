@@ -28,8 +28,15 @@ public class main {
                 case "1":{
 
                     List<Hand> hL = hs.readHands(ruta);
-                    for(int i=0; i< hL.size();i++)
+                    for(int i=0; i< hL.size();i++){
                         outStream += hL.get(i).toString() + "\n";
+                        String aux1 = hL.get(i).readDraw();
+                        if(aux1 != ""){
+                            String[] aux2 = aux1.split(";");
+                            for(String a: aux2)
+                                outStream += " -Draw: " + a + "\n";
+                        }
+                    }
                 break;
                 }
 
