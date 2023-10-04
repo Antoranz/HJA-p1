@@ -31,6 +31,7 @@ public class Hand implements Comparable<Hand>{
         Pair<String, Double> a = readHand(); 
         handString = a.getElement0();
         handValue = a.getElement1();
+        handDraw = readDraw();
     }
     public Card createCard(String number, String suit){
         return new Card(number, suit); 
@@ -126,7 +127,7 @@ public class Hand implements Comparable<Hand>{
                             nStraight++;
                             if(openEnded)
                                 openEnded = false;
-                            else if (i == 1 || i == 4)
+                            else if (i == 1 || i == 4 && pair == 0)
                                 openEnded = true;
                         }
                         else if ((i == 1 || i == 4) && !openEnded && !gutShot){
@@ -181,7 +182,7 @@ public class Hand implements Comparable<Hand>{
             draws += "Straight Gutshow Draw;";
         if(nStraight >= 4 && openEnded)
             draws += "Straight Open-end Draw;";
-        if(three == 1 || pair == 2)
+        if((three == 1 && pair == 0)|| pair == 2)
             draws += "Full Draw;";
 
         return draws;
