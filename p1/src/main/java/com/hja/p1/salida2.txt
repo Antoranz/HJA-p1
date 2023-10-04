@@ -1,2 +1,2 @@
-[Th, Jh, Qh, Ah, Ac] 2.14 Pair Color Draw;Straight Gutshow Draw;
-[4d, Jd, As, Ah, Ac] 4.14 Three of a kind Full Draw;
+Pair of Aces with [Th, Jh, Qh, Ah, Ac] 2.14
+Three of a kind (Aces) with [4d, Jd, As, Ah, Ac] 4.14

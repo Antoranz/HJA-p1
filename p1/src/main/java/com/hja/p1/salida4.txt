@@ -1,1 +1,1 @@
-[2h, 2d, 2c, Ah, Ac] 7.0214 Full house 
+Pair of Kings with [3h, Qd, Kc, Kh, Ah] 2.13

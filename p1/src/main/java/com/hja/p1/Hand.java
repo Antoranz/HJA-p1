@@ -42,6 +42,7 @@ public class Hand implements Comparable<Hand>{
                 int pair = 0, three = 0, poker = 0, escaleraReal = handList.get(0).getNumber();
                 double valorP1 = 0, valorP2 = 0, valorT1 = 0 , valorS = 0;
                 boolean lastPair = false, lastThree = false, straight =true, color = true;
+                
         for (int i = 1; i < handList.size(); i++) {
             if(color && !handList.get(i).getSuit().equalsIgnoreCase(handList.get(i-1).getSuit())) color = false;
             if(handList.get(i).getNumber() == handList.get(i-1).getNumber()){
@@ -59,7 +60,7 @@ public class Hand implements Comparable<Hand>{
                     valorT1 = handList.get(i).getNumber()/100.0;
                 }else if(lastThree){
                     poker += 1; 
-                    return new Pair("poker", 8 + valorP1); //3
+                    return new Pair("Poker", 8 + valorP1); //3
                 }         
             }
             else {
@@ -78,8 +79,10 @@ public class Hand implements Comparable<Hand>{
             if(escaleraReal == 60) return new Pair("Royal flush", 10.0); 
             else return new Pair("Straight flush", 9.0); 
         }
-        else if(pair == 1 && three == 1) return new Pair("Full house", 7 + valorT1 + valorP1/100.0);
-        else if(color) return new Pair("Flush", 6.0);
+        else if(pair == 1 && three == 1) return new Pair("full", 7 + valorT1 + valorP1/100.0);
+        
+        else if(color) return new Pair("Flush of " + mostrarSuit(handList.get(0).getSuit()), 6.0);
+        
         else if(straight) return new Pair("Straight", 5 + valorS);
         else if(pair == 0 && three == 1) return new Pair("Three of a kind", 4 + valorT1);
         else if(pair == 2) return new Pair("Double Pair" , 3 + valorP2 + valorP1/100.0);
@@ -196,7 +199,8 @@ public class Hand implements Comparable<Hand>{
     
     @Override
     public String toString(){
-       return handList.toString() +" "+ handValue +" "+ handString +" "+ handDraw;
+      // return handList.toString() +" "+ handValue +" "+ handString +" "+ handDraw;
+      return mostrarJugada() + " with " + handList.toString();
     }
 
     @Override
@@ -219,5 +223,86 @@ public class Hand implements Comparable<Hand>{
     }
     public ArrayList<Card> getHandList(){
         return handList;
+    }
+    
+    public String mostrarJugada(){
+        
+        String str = String.valueOf(this.handValue);
+
+        int parteEntera = Integer.parseInt(str.substring(0, str.indexOf('.')));
+        int parteDecimal = Integer.parseInt(str.substring(str.indexOf('.') + 1));
+        
+        String s = "";
+        
+        switch (parteEntera){
+            //Parejas y Poker
+            case 2:
+            case 8:
+                s = handString + " of " + mostrarNumero(parteDecimal);
+                break;
+            //Doble pareja
+            case 3: 
+                s = handString + " of " + mostrarNumero(parteDecimal / 100) + " and " + mostrarNumero(parteDecimal % 100);
+                break;
+            //Trio
+            case 4:
+                s = handString + " (" +mostrarNumero(parteDecimal) + ")";
+                break;
+            //Full
+            case 7:
+                s = mostrarNumero(parteDecimal / 100) + " " + handString + " of " + mostrarNumero(parteDecimal % 100);
+                break;
+            default:
+                s = handString;
+                break;
+        }
+        return s;
+    }
+    
+    public String mostrarNumero(int parteDecimal){
+
+        String s = "";
+        System.out.println("hola " + parteDecimal);
+        
+        switch (parteDecimal){
+            case 11:
+                s = "Jacks";
+                break;
+            case 12:
+                s = "Queens";
+                break;
+            case 13:
+                s = "Kings";
+                break;
+            case 14:
+                s = "Aces";
+                break;
+            default:
+                s = parteDecimal + "'s";
+        }
+        
+        return s;
+    }
+    
+    //Solo se utiliza para el flush
+    public String mostrarSuit(String suit){
+        
+        String s = "";
+        switch (suit){
+            case "h":
+                s = "Hearts";
+                break;
+            case "d":
+                s = "Diamonds";
+                break;
+            case "s":
+                s = "Spades";
+                break;
+            case "c":
+                s = "Clubs";
+                break;
+        }
+        
+        return s;
     }
 }

@@ -54,7 +54,7 @@ public class Player implements Comparable<Player>{
 
     @Override
     public String toString(){
-        return "Player " + this.id + " " + this.bestHand.toString();
+        return this.id + ": " + this.bestHand.toString();
     }
 
     public Hand getBestHand(){
