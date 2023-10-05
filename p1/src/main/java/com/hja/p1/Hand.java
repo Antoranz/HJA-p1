@@ -89,7 +89,7 @@ public class Hand implements Comparable<Hand>{
         return new Pair("High Card: "+handList.get(NCARDS-1),1.0+ handList.get(NCARDS-1).getNumber()/100.0);
     }
 
-    public String readDraw(){
+    /*public String readDraw(){
 
         //Se calcula todas las posibilidades de un solo recorrido, se puede hacer más eficiente¿?
         int pair = 0, three = 0, escaleraReal = handList.get(0).getNumber(), nColor = 1, nStraight = 1; 
@@ -148,6 +148,8 @@ public class Hand implements Comparable<Hand>{
                         //En caso de que no se cumpla nada de lo anterior no hay posibilidad de draw de escalera
                         }else{
                             straightDraw = false;
+                            if(openEnded)
+                                openEnded = false;
                         }
                     }
                 }
@@ -203,17 +205,254 @@ public class Hand implements Comparable<Hand>{
         Para el caso de la escalera de color y escalera real la forma de hacerlo que se nos ha ocurrido es extremadamente costosa y no creemos
         que sea la solución adecuada para resolver el problema, por tanto no la hemos añadido pero la dejamos aquí por si sirve de algo
         
-        */
+        
 
         return draws;
 
     }
-
+    
     public boolean posibleEscaleraDesdeAbajo(){
         return (handList.get(4).getNumber() == 14 && (handList.get(0).getNumber() == 2 || handList.get(0).getNumber() == 3) 
                 && (handList.get(1).getNumber() == 3 || handList.get(1).getNumber() == 4));
     }
+*/    
     
+    public String readDraw(){
+        String sol= "";
+        Card cf = colorFailed();
+        Integer oe = openEndedFailed();
+        Pair<Card,Card> pc = gutshotFailed();
+        Card c1 = pc.getElement0();
+        Card c2= pc.getElement1();
+        int suma =0;
+        for(int i=0; i<handList.size();i++){
+            suma += handList.get(i).getNumber();
+        }
+        
+        if(cf != null){
+            sol+="Flush;";
+        }
+        if(oe != null){
+            sol+="Straight Openended;";
+            if(cf!=null && cf.getNumber()==oe){             
+                if(suma - oe >= 50) sol += "Royal Straight;";
+                else sol+="Straight Flush;";
+            }else if(handValue==6.0){
+                sol+="Straight Flush;";
+            }
+        }
+        if(c1 != null && c2 != null){
+            sol+="Straight Double Gudshot;";
+            if( cf!=null && ( cf.getNumber()==c1.getNumber()  ||  cf.getNumber()==c2.getNumber() ) ){
+                if(suma - c1.getNumber() >= 50 || suma - c2.getNumber() >= 50 ) sol += "Royal Straight;";
+                else sol+="Straight Flush;";
+            }
+            else if(handValue==6.0){
+                sol+="Straight Flush;";
+            }
+        }
+        if(c1 != null && c2 == null){
+            sol+="Straight Gudshot;";
+            if( cf!=null && ( cf.getNumber()==c1.getNumber()) ){
+                if(suma - c1.getNumber() >= 50) sol += "Royal Straight;";
+                sol+="Straight Flush;";
+            }else if(handValue==6.0){
+                sol+="Straight Flush;";
+            }
+        }
+        return sol;
+    }
+    public Card colorFailed(){
+        
+        Integer impostor = null, indiceImpostor =null;
+        List<Integer> lista = Arrays.asList(0, 0, 0, 0);
+        List<Card> impostores = Arrays.asList(null, null, null, null);
+
+        for (Card carta : handList) {
+            String palo = carta.getSuit();
+            switch(palo){
+                case "d":
+                    lista.set(0,lista.get(0)+1);
+                    impostores.set(0,carta);
+                    break;
+                case "s":
+                    lista.set(1,lista.get(1)+1);
+                    impostores.set(1,carta);
+                    break;
+                case "c":
+                    lista.set(2,lista.get(2)+1);
+                    impostores.set(2,carta);
+                    break;
+                case "h":
+                    lista.set(3,lista.get(3)+1);
+                    impostores.set(3,carta);
+                    break;
+            }
+        }
+        for(Integer i : lista){
+            if(i!=1 && i!=4){        
+                return null;
+            }
+            if(i==1){
+                indiceImpostor=i;
+            }
+        }
+
+        return impostores.get(indiceImpostor);
+        
+    }
+    
+    public Integer openEndedFailed(){
+
+        boolean impostorFinal = false; 
+        int straight = 1;
+        for(int i=0; i<handList.size()-1;i++){
+            if(handList.get(i).getNumber()+1==handList.get(i+1).getNumber()){
+                straight++;
+            }else if(i!=3){
+                straight = 1;
+            }else impostorFinal=true;
+        }
+        
+        if(impostorFinal && straight == 4) return handList.get(4).getNumber();
+        else if(!impostorFinal && straight == 4) {
+            return handList.get(0).getNumber();
+        }
+        
+        
+        impostorFinal = false; 
+        straight = 1;
+        List<Card>handListA = new ArrayList<>(handList);
+        
+        for(int i=0; i<handList.size();i++){
+            Card c = handList.get(i);
+            if(c.getNumber()==14) c.setNumber(1);
+            handListA.set(i,c);
+        }
+        Collections.sort(handListA);
+        
+        for(int i=0; i<handListA.size()-1;i++){
+            if(handListA.get(i).getNumber()+1==handListA.get(i+1).getNumber()){
+                straight++;
+            }else if(i!=3){
+                straight = 1;
+            }else impostorFinal=true;
+        }
+        
+        if(impostorFinal && straight == 4) return handListA.get(4).getNumber();
+        else if(!impostorFinal && straight == 4) {
+            if(handListA.get(0).getNumber()==1) return 14;
+            return handList.get(0).getNumber();
+        }
+        return null;
+        
+    }
+    
+    public Pair<Card,Card> gutshotFailed(){
+        
+        int s=0;
+        int g=0;
+        boolean impostor1 = false;
+        Card posibleImpostor1 = null;
+        Card posibleImpostor2 = null;
+        Pair<Card, Card> sol = new Pair(null, null);
+        
+        for(int i = 0; i < handList.size()-1; i++){
+            if(handList.get(i).getNumber() +1== handList.get(i+1).getNumber()){ //salto normal
+                s++;
+            }
+            else if(handList.get(i).getNumber() +2== handList.get(i+1).getNumber()){ //salto gutshot
+                g++;
+                s+=2;
+                
+                if(g>=2){
+                   s-=2;
+                   if(impostor1 && (!(handList.get(i).getNumber()+2==handList.get(i+1).getNumber()) || (i+2<handList.size() && !(handList.get(i+1).getNumber()+2==handList.get(i+2).getNumber())))){
+                       sol = new Pair(posibleImpostor1, null);
+                   }
+                   else if (impostor1){
+                       sol = new Pair(posibleImpostor1,handList.get(i));
+                   }
+                }
+                else{
+                  posibleImpostor1 = handList.get(i);
+                  if(!(handList.get(i).getNumber()+2==handList.get(i+1).getNumber()) || (i-1>=0 && !(handList.get(i).getNumber()+2==handList.get(i-1).getNumber()))){
+                      impostor1 = false;
+                  }
+                  else{
+                      impostor1 = true;
+                  }
+                }   
+            }
+        }
+        if(s==4){
+            return sol;
+        }
+        
+        List<Card>handListA = new ArrayList<>(handList);
+        
+        for(int i=0; i<handList.size();i++){
+            Card c = handList.get(i);
+            if(c.getNumber()==14) c.setNumber(1);
+            handListA.set(i,c);
+        }
+        Collections.sort(handListA);
+        
+        s=0;
+        g=0;
+        impostor1 = false;
+        posibleImpostor1 = null;
+        posibleImpostor2 = null;
+        sol = new Pair(null, null);
+        
+        for(int i = 0; i < handListA.size()-1; i++){
+            if(handListA.get(i).getNumber() +1== handListA.get(i+1).getNumber()){ //salto normal
+                s++;
+            }
+            else if(handListA.get(i).getNumber() +2== handListA.get(i+1).getNumber()){ //salto gutshot
+                g++;
+                s+=2;
+                
+                if(g>=2){
+                   s-=2;
+                   if(impostor1 && (!(handListA.get(i).getNumber()+2==handListA.get(i+1).getNumber()) || (i+2<handListA.size() && !(handListA.get(i+1).getNumber()+2==handListA.get(i+2).getNumber())))){
+                       if (posibleImpostor1.getNumber()==1){
+                           posibleImpostor1.setNumber(14);
+                       }
+                       sol = new Pair(posibleImpostor1, null);
+                   }
+                   else if (impostor1){
+                       if (posibleImpostor1.getNumber()==1){
+                           posibleImpostor1.setNumber(14);
+                       }
+                       if(handListA.get(i).getNumber()==1) {
+                           Card c = handListA.get(i);
+                           c.setNumber(14);
+                           handListA.set(i,c);
+                       }
+                       sol = new Pair(posibleImpostor1,handListA.get(i));
+                   }
+                }
+                else{
+                  posibleImpostor1 = handListA.get(i);
+                  if(!(handListA.get(i).getNumber()+2==handListA.get(i+1).getNumber()) || (i-1>=0 && !(handListA.get(i).getNumber()+2==handListA.get(i-1).getNumber()))){
+                      impostor1 = false;
+                  }
+                  else{
+                      impostor1 = true;
+                  }
+                }   
+            }
+        }
+        if(s==4){
+            return sol;
+        }
+        
+        return new Pair(null, null);
+    }
+    
+    
+
     @Override
     public String toString(){
       // return handList.toString() +" "+ handValue +" "+ handString +" "+ handDraw;
@@ -243,11 +482,11 @@ public class Hand implements Comparable<Hand>{
     }
     
     public String mostrarJugada(){
-        
+            
         String str = String.valueOf(this.handValue);
-
-        int parteEntera = Integer.parseInt(str.substring(0, str.indexOf('.')));
-        int parteDecimal = Integer.parseInt(str.substring(str.indexOf('.') + 1));
+        
+        int parteEntera = (int) (this.handValue/1);
+        int parteDecimal = (int) (this.handValue%1);
         
         String s = "";
         

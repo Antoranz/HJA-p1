@@ -1,1 +1,39 @@
 Royal flush with [Th, Jh, Qh, Kh, Ah]
+ -Draw: Straight Openended
+Flush of Hearts with [2h, Jh, Qh, Kh, Ah]
+ -Draw: Straight Openended
+ -Draw: Straight Flush
+Flush of Hearts with [2h, 3h, 4h, 8h, Ah]
+ -Draw: Straight Openended
+ -Draw: Straight Flush
+Flush of Hearts with [7h, 8h, 9h, Th, Ah]
+ -Draw: Straight Openended
+ -Draw: Straight Flush
+Flush of Hearts with [2h, 7h, 8h, 9h, Jh]
+Flush of Hearts with [9h, Jh, Qh, Kh, Ah]
+ -Draw: Straight Openended
+ -Draw: Straight Flush
+Flush of Hearts with [2h, 3h, 4h, 6h, Ah]
+ -Draw: Straight Openended
+ -Draw: Straight Flush
+Flush of Hearts with [2h, 3h, 4h, 6h, Ah]
+ -Draw: Straight Openended
+ -Draw: Straight Flush
+Double Pair of 0's and 0's with [8h, 8s, 9h, 9s, Ah]
+Three of a kind (0's) with [9h, 9s, 9c, Jh, As]
+High Card: Ah with [2h, Js, Qh, Kh, Ah]
+ -Draw: Straight Openended
+High Card: Ah with [2h, 3s, 4h, 8h, Ah]
+ -Draw: Straight Openended
+High Card: Jh with [2h, 7h, 8s, 9h, Jh]
+High Card: Ah with [9h, Jh, Qh, Ks, Ah]
+ -Draw: Straight Openended
+High Card: Ah with [2h, 3s, 4h, 6h, Ah]
+ -Draw: Straight Openended
+High Card: As with [9h, Ts, Jh, Qh, As]
+ -Draw: Straight Openended
+High Card: As with [3h, 4h, 5h, 6s, As]
+ -Draw: Straight Openended
+Flush of Hearts with [2h, Jh, Qh, Kh, Ah]
+ -Draw: Straight Openended
+ -Draw: Straight Flush

@@ -2,7 +2,7 @@ package com.hja.p1;
 
 public class Card implements Comparable<Card>{
     
-    private final int number;
+    private  int number;
     private final String suit;
     
     
@@ -57,5 +57,9 @@ public class Card implements Comparable<Card>{
         }
         return valueOrder.charAt(number%10)+suit+""; 
     }
+
+   public void setNumber(int i) {
+        number = i;
+   }
     
 }
