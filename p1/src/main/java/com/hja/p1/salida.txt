@@ -2,7 +2,7 @@ Royal flush with [Th, Jh, Qh, Kh, Ah]
  -Draw: Straight Openended
 Flush of Hearts with [2h, Jh, Qh, Kh, Ah]
  -Draw: Straight Openended
- -Draw: Straight Flush
+ -Draw: Royal Straight
 Flush of Hearts with [2h, 3h, 4h, 8h, Ah]
  -Draw: Straight Openended
  -Draw: Straight Flush
@@ -12,7 +12,7 @@ Flush of Hearts with [7h, 8h, 9h, Th, Ah]
 Flush of Hearts with [2h, 7h, 8h, 9h, Jh]
 Flush of Hearts with [9h, Jh, Qh, Kh, Ah]
  -Draw: Straight Openended
- -Draw: Straight Flush
+ -Draw: Royal Straight
 Flush of Hearts with [2h, 3h, 4h, 6h, Ah]
  -Draw: Straight Openended
  -Draw: Straight Flush
@@ -36,4 +36,4 @@ High Card: As with [3h, 4h, 5h, 6s, As]
  -Draw: Straight Openended
 Flush of Hearts with [2h, Jh, Qh, Kh, Ah]
  -Draw: Straight Openended
- -Draw: Straight Flush
+ -Draw: Royal Straight

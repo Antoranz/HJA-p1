@@ -219,11 +219,13 @@ public class Hand implements Comparable<Hand>{
     
     public String readDraw(){
         String sol= "";
+
         Card cf = colorFailed();
         Integer oe = openEndedFailed();
         Pair<Card,Card> pc = gutshotFailed();
         Card c1 = pc.getElement0();
         Card c2= pc.getElement1();
+        
         int suma =0;
         for(int i=0; i<handList.size();i++){
             suma += handList.get(i).getNumber();
@@ -235,29 +237,32 @@ public class Hand implements Comparable<Hand>{
         if(oe != null){
             sol+="Straight Openended;";
             if(cf!=null && cf.getNumber()==oe){             
-                if(suma - oe >= 50) sol += "Royal Straight;";
+                if(suma - oe +10 == 60 || suma - oe +14 == 60) sol += "Royal Straight;";
                 else sol+="Straight Flush;";
             }else if(handValue==6.0){
-                sol+="Straight Flush;";
+                if(suma - oe +10 == 60 || suma - oe +14 == 60) sol += "Royal Straight;";
+                else sol+="Straight Flush;";
             }
         }
         if(c1 != null && c2 != null){
             sol+="Straight Double Gudshot;";
             if( cf!=null && ( cf.getNumber()==c1.getNumber()  ||  cf.getNumber()==c2.getNumber() ) ){
-                if(suma - c1.getNumber() >= 50 || suma - c2.getNumber() >= 50 ) sol += "Royal Straight;";
+                if(suma - c1.getNumber() >= 46 || suma - c2.getNumber() >= 46 ) sol += "Royal Straight;";
                 else sol+="Straight Flush;";
             }
             else if(handValue==6.0){
-                sol+="Straight Flush;";
+                if(suma - c1.getNumber() >= 46 || suma - c2.getNumber() >= 46 ) sol += "Royal Straight;";
+                else sol+="Straight Flush;";
             }
         }
         if(c1 != null && c2 == null){
             sol+="Straight Gudshot;";
             if( cf!=null && ( cf.getNumber()==c1.getNumber()) ){
-                if(suma - c1.getNumber() >= 50) sol += "Royal Straight;";
-                sol+="Straight Flush;";
+                if(suma - c1.getNumber() >= 46) sol += "Royal Straight;";
+                else sol+="Straight Flush;";
             }else if(handValue==6.0){
-                sol+="Straight Flush;";
+                if(suma - c1.getNumber() >= 46) sol += "Royal Straight;";
+                else sol+="Straight Flush;";
             }
         }
         return sol;
@@ -319,16 +324,22 @@ public class Hand implements Comparable<Hand>{
             return handList.get(0).getNumber();
         }
         
-        
         impostorFinal = false; 
         straight = 1;
-        List<Card>handListA = new ArrayList<>(handList);
         
-        for(int i=0; i<handList.size();i++){
-            Card c = handList.get(i);
-            if(c.getNumber()==14) c.setNumber(1);
-            handListA.set(i,c);
+        List<Card> handListA = new ArrayList<>();
+        for (Card originalCard : handList) {
+            Card copiedCard = new Card(String.valueOf(originalCard.getNumber()),originalCard.getSuit());
+            handListA.add(copiedCard);
         }
+        
+        for (int i = 0; i < handListA.size(); i++) {
+            Card c = handListA.get(i);
+            if (c.getNumber() == 14) {
+                c.setNumber(1);
+            }
+        }
+
         Collections.sort(handListA);
         
         for(int i=0; i<handListA.size()-1;i++){
@@ -389,13 +400,19 @@ public class Hand implements Comparable<Hand>{
             return sol;
         }
         
-        List<Card>handListA = new ArrayList<>(handList);
-        
-        for(int i=0; i<handList.size();i++){
-            Card c = handList.get(i);
-            if(c.getNumber()==14) c.setNumber(1);
-            handListA.set(i,c);
+        List<Card> handListA = new ArrayList<>();
+        for (Card originalCard : handList) {
+            Card copiedCard = new Card(String.valueOf(originalCard.getNumber()),originalCard.getSuit());
+            handListA.add(copiedCard);
         }
+        
+        for (int i = 0; i < handListA.size(); i++) {
+            Card c = handListA.get(i);
+            if (c.getNumber() == 14) {
+                c.setNumber(1);
+            }
+        }
+
         Collections.sort(handListA);
         
         s=0;
