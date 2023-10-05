@@ -1,2 +1,5 @@
-Pair of 0's with [Th, Jh, Qh, Ah, Ac]
-Three of a kind (0's) with [4d, Jd, As, Ah, Ac]
+Pair of Aces with [Th, Jh, Qh, Ah, Ac]
+ -Draw: Flush
+ -Draw: Straight Gudshot
+ -Draw: Straight Flush
+Three of a kind (Aces) with [4d, Jd, As, Ah, Ac]

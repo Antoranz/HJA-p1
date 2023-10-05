@@ -265,6 +265,14 @@ public class Hand implements Comparable<Hand>{
             }
             if(s==4 && nPair==1) return new Pair<Card,Card>(handList.get(pIndex),null);
         }
+        if(handList.get(0).getNumber()+1==handList.get(1).getNumber() && handList.get(1).getNumber()+1==handList.get(2).getNumber() && handList.get(2).getNumber()+2==handList.get(3).getNumber() && handList.get(3).getNumber()==handList.get(4).getNumber()){
+            return new Pair<Card,Card>(handList.get(4),null);
+        }
+        else if( handList.get(0).getNumber()==handList.get(1).getNumber() && handList.get(1).getNumber()+2==handList.get(2).getNumber() && handList.get(2).getNumber()+1==handList.get(3).getNumber() && handList.get(3).getNumber()+1==handList.get(4).getNumber()) {
+            return new Pair<Card,Card>(handList.get(0),null);
+        }
+        
+        
         List<Card> handListA = new ArrayList<>();
         for (Card originalCard : handList) {
             Card copiedCard = new Card(String.valueOf(originalCard.getNumber()),originalCard.getSuit());
@@ -328,6 +336,12 @@ public class Hand implements Comparable<Hand>{
             }
             if(s==4 && nPair==1) return new Pair<Card,Card>(handListA.get(pIndex),null);
         }
+        if(handListA.get(0).getNumber()+1==handListA.get(1).getNumber() && handListA.get(1).getNumber()+1==handListA.get(2).getNumber() && handListA.get(2).getNumber()+2==handListA.get(3).getNumber() && handListA.get(3).getNumber()==handListA.get(4).getNumber()){
+            return new Pair<Card,Card>(handListA.get(4),null);
+        }
+        else if( handListA.get(0).getNumber()==handListA.get(1).getNumber() && handListA.get(1).getNumber()+2==handListA.get(2).getNumber() && handListA.get(2).getNumber()+1==handListA.get(3).getNumber() && handListA.get(3).getNumber()+1==handListA.get(4).getNumber()) {
+            return new Pair<Card,Card>(handListA.get(0),null);
+        }
         return new Pair<>(null,null);
         
     }
@@ -354,31 +368,31 @@ public class Hand implements Comparable<Hand>{
             }
             else sol+="Straight Openended;";
             if(cf!=null && cf.getNumber()==oe){             
-                if(suma - oe +10 == 60 || suma - oe +14 == 60) sol += "Royal Straight;";
+                if(suma - oe +10 == 60 || suma - oe +14 == 60 ) sol += "Royal Straight;";
                 else sol+="Straight Flush;";
             }else if(handValue==6.0){
-                if(suma - oe +10 == 60 || suma - oe +14 == 60) sol += "Royal Straight;";
+                if(suma - oe +10 == 60 || suma - oe +14 == 60 ) sol += "Royal Straight;";
                 else sol+="Straight Flush;";
             }
         }
         if(c1 != null && c2 != null){
             sol+="Straight Double Gudshot;";
             if( cf!=null && ( cf.getNumber()==c1.getNumber()  ||  cf.getNumber()==c2.getNumber() ) ){
-                if(suma - c1.getNumber() >= 46 || suma - c2.getNumber() >= 46 ) sol += "Royal Straight;";
+                if(suma - c1.getNumber() >= 46 || suma - c2.getNumber() >= 46 && suma<60) sol += "Royal Straight;";
                 else sol+="Straight Flush;";
             }
             else if(handValue==6.0){
-                if(suma - c1.getNumber() >= 46 || suma - c2.getNumber() >= 46 ) sol += "Royal Straight;";
+                if(suma - c1.getNumber() >= 46 || suma - c2.getNumber() >= 46 && suma<60) sol += "Royal Straight;";
                 else sol+="Straight Flush;";
             }
         }
         if(c1 != null && c2 == null){
             sol+="Straight Gudshot;";
             if( cf!=null && ( cf.getNumber()==c1.getNumber()) ){
-                if(suma - c1.getNumber() >= 46) sol += "Royal Straight;";
+                if(suma - c1.getNumber() >= 46&& suma<60) sol += "Royal Straight;";
                 else sol+="Straight Flush;";
             }else if(handValue==6.0){
-                if(suma - c1.getNumber() >= 46) sol += "Royal Straight;";
+                if(suma - c1.getNumber() >= 46 && suma<60) sol += "Royal Straight;";
                 else sol+="Straight Flush;";
             }
         }
@@ -411,15 +425,15 @@ public class Hand implements Comparable<Hand>{
                     break;
             }
         }
-        for(Integer i : lista){
-            if(i!=1 && i!=4){        
+        boolean noHayColor = false;
+        for(int i=0; i<lista.size(); i++){
+            if(lista.get(i)!=1 && lista.get(i)!=4 && lista.get(i)!=0){        
                 return null;
             }
-            if(i==1){
+            if(lista.get(i)==1){
                 indiceImpostor=i;
             }
         }
-
         return impostores.get(indiceImpostor);
         
     }
@@ -621,6 +635,7 @@ public class Hand implements Comparable<Hand>{
         
         int parteEntera = (int) (this.handValue/1);
         int parteDecimal = (int) (this.handValue%1);
+        if(parteDecimal==0) parteDecimal = 14;
         
         String s = "";
         

@@ -1,4 +1,4 @@
-124: Poker of 1's with [1d, 1c, 1s, 1h, Th] 8.01
-125: Straight with [6c, 7c, 8c, 9h, Th] 5.1
-123: Double Pair of Kings and 1's with [1d, 1c, Th, Kh, Kc] 3.1301
-126: Pair of 1's with [1d, 1c, 9h, Th, Kc] 2.01
+125: Straight with [6c, 7c, 8c, 9h, Th]
+123: Pair of Aces with [9h, Th, Ks, Ah, Ac]
+126: Pair of Aces with [6c, 9h, Th, Ks, Kc]
+124: Pair of Aces with [9h, Th, Js, Jh, Ks]

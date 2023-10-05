@@ -43,7 +43,7 @@ public class main {
                 case "2":{
 
                     List<Player> pL = hs.readNCards(ruta,false);
-                    for(int i=0; i< pL.size();i++)
+                    for(int i=0; i< pL.size();i++){
                         outStream += pL.get(i).getBestHand() + "\n";
                         String aux1 = pL.get(i).getBestHand().readDraw();
                         if(aux1 != ""){
@@ -51,8 +51,10 @@ public class main {
                             for(String a: aux2)
                                 outStream += " -Draw: " + a + "\n";
                         }
+                    }
                 break;
                 }
+
                 
                 case "3":{
 
