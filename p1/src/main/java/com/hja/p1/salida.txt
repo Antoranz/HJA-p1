@@ -1,39 +1,56 @@
+Pair of 0's with [2h, 3h, 3d, 4h, 6h]
+ -Draw: Straight Gudshot
+Pair of 0's with [2h, 4h, 4d, 5d, Ah]
+ -Draw: Straight Gudshot
 Royal flush with [Th, Jh, Qh, Kh, Ah]
- -Draw: Straight Openended
+ -Draw: Straight Openended One Side
 Flush of Hearts with [2h, Jh, Qh, Kh, Ah]
- -Draw: Straight Openended
+ -Draw: Straight Openended One Side
  -Draw: Royal Straight
 Flush of Hearts with [2h, 3h, 4h, 8h, Ah]
- -Draw: Straight Openended
+ -Draw: Straight Openended One Side
  -Draw: Straight Flush
 Flush of Hearts with [7h, 8h, 9h, Th, Ah]
- -Draw: Straight Openended
+ -Draw: Straight Openended One Side
  -Draw: Straight Flush
 Flush of Hearts with [2h, 7h, 8h, 9h, Jh]
+ -Draw: Straight Gudshot
+ -Draw: Straight Flush
 Flush of Hearts with [9h, Jh, Qh, Kh, Ah]
- -Draw: Straight Openended
+ -Draw: Straight Openended One Side
+ -Draw: Royal Straight
+ -Draw: Straight Double Gudshot
  -Draw: Royal Straight
 Flush of Hearts with [2h, 3h, 4h, 6h, Ah]
- -Draw: Straight Openended
+ -Draw: Straight Openended One Side
+ -Draw: Straight Flush
+ -Draw: Straight Double Gudshot
  -Draw: Straight Flush
 Flush of Hearts with [2h, 3h, 4h, 6h, Ah]
- -Draw: Straight Openended
+ -Draw: Straight Openended One Side
+ -Draw: Straight Flush
+ -Draw: Straight Double Gudshot
  -Draw: Straight Flush
 Double Pair of 0's and 0's with [8h, 8s, 9h, 9s, Ah]
 Three of a kind (0's) with [9h, 9s, 9c, Jh, As]
 High Card: Ah with [2h, Js, Qh, Kh, Ah]
- -Draw: Straight Openended
+ -Draw: Straight Openended One Side
 High Card: Ah with [2h, 3s, 4h, 8h, Ah]
- -Draw: Straight Openended
+ -Draw: Straight Openended One Side
 High Card: Jh with [2h, 7h, 8s, 9h, Jh]
+ -Draw: Straight Gudshot
 High Card: Ah with [9h, Jh, Qh, Ks, Ah]
- -Draw: Straight Openended
+ -Draw: Straight Openended One Side
+ -Draw: Straight Double Gudshot
 High Card: Ah with [2h, 3s, 4h, 6h, Ah]
- -Draw: Straight Openended
+ -Draw: Straight Openended One Side
+ -Draw: Straight Double Gudshot
 High Card: As with [9h, Ts, Jh, Qh, As]
- -Draw: Straight Openended
+ -Draw: Straight Openended One Side
+ -Draw: Straight Double Gudshot
 High Card: As with [3h, 4h, 5h, 6s, As]
- -Draw: Straight Openended
+ -Draw: Straight Openended One Side
+ -Draw: Straight Double Gudshot
 Flush of Hearts with [2h, Jh, Qh, Kh, Ah]
- -Draw: Straight Openended
+ -Draw: Straight Openended One Side
  -Draw: Royal Straight

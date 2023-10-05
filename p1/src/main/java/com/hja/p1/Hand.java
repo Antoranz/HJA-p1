@@ -216,13 +216,127 @@ public class Hand implements Comparable<Hand>{
                 && (handList.get(1).getNumber() == 3 || handList.get(1).getNumber() == 4));
     }
 */    
-    
+    public Pair<Card,Card> gutshotFailed2(){
+        int g = 0;
+        int nPair=0;
+        int pIndex = 0;
+        //Double gutshot 1
+        if(handList.get(0).getNumber()+1 == handList.get(1).getNumber() && handList.get(3).getNumber()+1 == handList.get(4).getNumber()){
+            int s=3;
+            for(int i=1; i<3;i++){
+                if(handList.get(i).getNumber()+1 == handList.get(i+1).getNumber()) s++;
+                else if(handList.get(i).getNumber()+2 == handList.get(i+1).getNumber()){
+                    g++;
+                }else if(handList.get(i).getNumber() == handList.get(i+1).getNumber()) {
+                    nPair++;
+                    pIndex = i;
+                }
+            }
+            if(s==4 && g==1) return new Pair<Card,Card>(handList.get(0),handList.get(4)); //C1 DG
+            if(g==1 && nPair==1) return new Pair<Card,Card>(handList.get(pIndex),null); //C1 DG con Pareja
+        }
+        if(handList.get(1).getNumber()+1==handList.get(2).getNumber()&&handList.get(2).getNumber()+1 ==handList.get(3).getNumber()){
+            //Los tres del medio hacen escalera
+            if(handList.get(0).getNumber()+1 == handList.get(1).getNumber() && handList.get(3).getNumber()+2 == handList.get(4).getNumber()){
+                return new Pair<Card,Card>(handList.get(0),handList.get(4));
+            }else if(handList.get(0).getNumber()+2 == handList.get(1).getNumber() && handList.get(3).getNumber()+1 == handList.get(4).getNumber()){
+                return new Pair<Card,Card>(handList.get(0),handList.get(4));
+            }else if(handList.get(0).getNumber()+2 == handList.get(1).getNumber() && handList.get(3).getNumber()+2 == handList.get(4).getNumber()){
+                return new Pair<Card,Card>(handList.get(0),handList.get(4));
+            }else if(handList.get(3).getNumber()+2 == handList.get(4).getNumber()){
+                return new Pair<Card,Card>(handList.get(0),null); 
+            }else if(handList.get(0).getNumber()+2 == handList.get(1).getNumber()){
+                return new Pair<Card,Card>(handList.get(4),null); 
+            }
+        }
+        if( (handList.get(0).getNumber()+1==handList.get(1).getNumber() && handList.get(3).getNumber()+2==handList.get(4).getNumber()) || (handList.get(0).getNumber()+2==handList.get(1).getNumber() && handList.get(3).getNumber()+1==handList.get(4).getNumber()) ){
+            g = 0;
+            nPair=0;
+            pIndex = 0;
+            int s=3;
+            for(int i=1; i<3;i++){
+                if(handList.get(i).getNumber()+1 == handList.get(i+1).getNumber()) s++;
+                else if(handList.get(i).getNumber()+2 == handList.get(i+1).getNumber()){
+                    g++;
+                }else if(handList.get(i).getNumber() == handList.get(i+1).getNumber()) {
+                    nPair++;
+                    pIndex = i;
+                }
+            }
+            if(s==4 && nPair==1) return new Pair<Card,Card>(handList.get(pIndex),null);
+        }
+        List<Card> handListA = new ArrayList<>();
+        for (Card originalCard : handList) {
+            Card copiedCard = new Card(String.valueOf(originalCard.getNumber()),originalCard.getSuit());
+            handListA.add(copiedCard);
+        }
+        
+        for (int i = 0; i < handListA.size(); i++) {
+            Card c = handListA.get(i);
+            if (c.getNumber() == 14) {
+                c.setNumber(1);
+            }
+        }
+        
+        Collections.sort(handListA);
+        
+        g = 0;
+        nPair=0;
+        pIndex = 0;
+        //Double gutshot
+        if(handListA.get(0).getNumber()+1 == handListA.get(1).getNumber() && handListA.get(3).getNumber()+1 == handListA.get(4).getNumber()){
+            int s=3;
+            for(int i=1; i<3;i++){
+                if(handListA.get(i).getNumber()+1 == handListA.get(i+1).getNumber()) s++;
+                else if(handListA.get(i).getNumber()+2 == handListA.get(i+1).getNumber()){
+                    g++;
+                }else if(handListA.get(i).getNumber() == handListA.get(i+1).getNumber()) {
+                    nPair++;
+                    pIndex = i;
+                }
+            }
+            if(s==4 && g==1) return new Pair<>(handListA.get(0),handListA.get(4)); //C1 DG
+            if(g==1 && nPair==1) return new Pair<>(handListA.get(pIndex),null); //C1 DG con Pareja
+        }
+        if(handListA.get(1).getNumber()+1==handListA.get(2).getNumber()&&handListA.get(2).getNumber()+1 ==handListA.get(3).getNumber()){
+            //Los tres del medio hacen escalera
+            if(handListA.get(0).getNumber()+1 == handListA.get(1).getNumber() && handListA.get(3).getNumber()+2 == handListA.get(4).getNumber()){
+                return new Pair<>(handListA.get(0),handListA.get(4));
+            }else if(handListA.get(0).getNumber()+2 == handListA.get(1).getNumber() && handListA.get(3).getNumber()+1 == handListA.get(4).getNumber()){
+                return new Pair<>(handListA.get(0),handListA.get(4));
+            }else if(handListA.get(0).getNumber()+2 == handListA.get(1).getNumber() && handListA.get(3).getNumber()+2 == handListA.get(4).getNumber()){
+                return new Pair<>(handListA.get(0),handListA.get(4));
+            }else if(handListA.get(3).getNumber()+2 == handListA.get(4).getNumber() ){
+                return new Pair<>(handListA.get(0),null); 
+            }else if(handListA.get(0).getNumber()+2 == handListA.get(1).getNumber()){
+                return new Pair<>(handListA.get(4),null); 
+            }
+        }
+        if( (handListA.get(0).getNumber()+1==handListA.get(1).getNumber() && handListA.get(3).getNumber()+2==handListA.get(4).getNumber()) || (handListA.get(0).getNumber()+2==handListA.get(1).getNumber() && handListA.get(3).getNumber()+1==handListA.get(4).getNumber()) ){
+            g = 0;
+            nPair=0;
+            pIndex = 0;
+            int s=3;
+            for(int i=1; i<3;i++){
+                if(handListA.get(i).getNumber()+1 == handListA.get(i+1).getNumber()) s++;
+                else if(handListA.get(i).getNumber()+2 == handListA.get(i+1).getNumber()){
+                    g++;
+                }else if(handListA.get(i).getNumber() == handListA.get(i+1).getNumber()) {
+                    nPair++;
+                    pIndex = i;
+                }
+            }
+            if(s==4 && nPair==1) return new Pair<Card,Card>(handListA.get(pIndex),null);
+        }
+        return new Pair<>(null,null);
+        
+    }
     public String readDraw(){
         String sol= "";
 
         Card cf = colorFailed();
         Integer oe = openEndedFailed();
-        Pair<Card,Card> pc = gutshotFailed();
+        Pair<Card,Card> pc = gutshotFailed2();
         Card c1 = pc.getElement0();
         Card c2= pc.getElement1();
         
@@ -235,7 +349,10 @@ public class Hand implements Comparable<Hand>{
             sol+="Flush;";
         }
         if(oe != null){
-            sol+="Straight Openended;";
+            if(handList.get(4).getNumber()==14){
+                sol+="Straight Openended One Side;";
+            }
+            else sol+="Straight Openended;";
             if(cf!=null && cf.getNumber()==oe){             
                 if(suma - oe +10 == 60 || suma - oe +14 == 60) sol += "Royal Straight;";
                 else sol+="Straight Flush;";
@@ -308,7 +425,7 @@ public class Hand implements Comparable<Hand>{
     }
     
     public Integer openEndedFailed(){
-
+ 
         boolean impostorFinal = false; 
         int straight = 1;
         for(int i=0; i<handList.size()-1;i++){
@@ -326,7 +443,7 @@ public class Hand implements Comparable<Hand>{
         
         impostorFinal = false; 
         straight = 1;
-        
+              
         List<Card> handListA = new ArrayList<>();
         for (Card originalCard : handList) {
             Card copiedCard = new Card(String.valueOf(originalCard.getNumber()),originalCard.getSuit());

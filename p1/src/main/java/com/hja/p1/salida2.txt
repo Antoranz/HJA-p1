@@ -1,2 +1,2 @@
-Pair of Aces with [Th, Jh, Qh, Ah, Ac] 2.14
-Three of a kind (Aces) with [4d, Jd, As, Ah, Ac] 4.14
+Pair of 0's with [Th, Jh, Qh, Ah, Ac]
+Three of a kind (0's) with [4d, Jd, As, Ah, Ac]
